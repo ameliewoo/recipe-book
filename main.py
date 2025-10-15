@@ -58,11 +58,9 @@ def createRecipeBook():
                 "Dietary Tags": diet,
                 "Instructions": instructions
             }
-            
-    print(folderPath)
-    print(recipeBook)
+    #print(folderPath)
+    #print(recipeBook)
     return recipeBook
-
 def Search():
     print("===================================")
     userMenuChoice = int(input("Search options:\n" \
@@ -72,8 +70,8 @@ def Search():
     "\tSearch by Meal - enter 4\n" \
     "\tSearch by dietary tags - enter 5\n" \
     "\tRandom recipe! - enter 0\n" \
-    "==================================="))
-    
+    "===================================\n" \
+    "Please enter your choice:   "))
     try :
         match userMenuChoice:
             case 1:
@@ -111,7 +109,6 @@ def searchbyTitle():
             print(f"Instructions: {' '.join(recipe['Instructions'])}")
             return  
 
-
 def searchbyIngredients():
     #takes input from user and searches the recipe book for the ingredients
     recipeBook = createRecipeBook()
@@ -124,6 +121,7 @@ def searchbyIngredients():
             print(f"Meal: {recipe['Meal']}")
             print(f"Dietary Tags: {', '.join(recipe['Dietary Tags'])}")
             print(f"Instructions: {' '.join(recipe['Instructions'])}")
+
 def searchByServings():
     recipeBook = createRecipeBook()
     servings = input("Enter the serving size: ")
@@ -135,7 +133,6 @@ def searchByServings():
             print(f"Meal: {recipe['Meal']}")
             print(f"Dietary Tags: {', '.join(recipe['Dietary Tags'])}")
             print(f"Instructions: {' '.join(recipe['Instructions'])}")
-            
 
 def searchByMeal():
     recipeBook = createRecipeBook()
@@ -163,12 +160,12 @@ def searchByDiet():
 
 def randomRecipe():
     import random
-    P = '/workspaces/recipe-book/recipe-book-collection'
-    files = os.listdir(P)
+    folderPath = os.path.dirname(__file__) + '/recipe-book-collection'
+    files = os.listdir(folderPath)
     random_file = random.choice(files)
     print(f"Random Recipe: {random_file}")
-    with open(os.path.join(P, random_file), 'r') as file:
+    with open(os.path.join(folderPath, random_file), 'r') as file:
         print(file.read())
 
-#! main running code here
+#! main running code here -----------------------------------------------
 main()
