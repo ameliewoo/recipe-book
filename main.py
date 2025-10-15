@@ -1,15 +1,15 @@
 import os
 def main():
     print("Welcome to the Recipe Book")
-    userOpeningMenuChoice = input("Are you:" \
-    "Searching for a recipe? - enter 1" \
-    "Creating a new recipe? - enter 2 " \
+    userOpeningMenuChoice = input("Are you:\n" \
+    "\tSearching for a recipe? - enter 1\n" \
+    "\tCreating a new recipe? - enter 2\n" \
     )
     try:
         userOpeningMenuChoice = int(userOpeningMenuChoice)
     except ValueError:
         print("Invalid input, please enter a number")
-        exit()
+        
     match userOpeningMenuChoice:
         case 1:
             Search()
@@ -65,13 +65,13 @@ def createRecipeBook():
 
 def Search():
     print("===================================")
-    userMenuChoice = int(input("Search options:" \
-    "Search by Title - enter 1" \
-    "Search by Ingredients - enter 2" \
-    "Search by Serving Size - enter 3" \
-    "Search by Meal - enter 4" \
-    "Search by dietary tags - enter 5" \
-    "Random recipe! - enter 0" \
+    userMenuChoice = int(input("Search options:\n" \
+    "\tSearch by Title - enter 1\n" \
+    "\tSearch by Ingredients - enter 2\n" \
+    "\tSearch by Serving Size - enter 3\n" \
+    "\tSearch by Meal - enter 4\n" \
+    "\tSearch by dietary tags - enter 5\n" \
+    "\tRandom recipe! - enter 0\n" \
     "==================================="))
     
     try :
@@ -114,7 +114,6 @@ def searchbyTitle():
 
 def searchbyIngredients():
     #takes input from user and searches the recipe book for the ingredients
-    #! alow 
     recipeBook = createRecipeBook()
     ingredients = input("Enter the ingredients (comma-separated): ").strip().split(", ")
     for recipe in recipeBook.values():
@@ -125,15 +124,42 @@ def searchbyIngredients():
             print(f"Meal: {recipe['Meal']}")
             print(f"Dietary Tags: {', '.join(recipe['Dietary Tags'])}")
             print(f"Instructions: {' '.join(recipe['Instructions'])}")
-            return
 def searchByServings():
-    pass
+    recipeBook = createRecipeBook()
+    servings = input("Enter the serving size: ")
+    for recipe in recipeBook.values():
+        if recipe["Servings"] == servings:
+            print(f"Recipe found: {recipe['Title']}")
+            print(f"Ingredients: {', '.join(recipe['Ingredients'])}")
+            print(f"Servings: {recipe['Servings']}")
+            print(f"Meal: {recipe['Meal']}")
+            print(f"Dietary Tags: {', '.join(recipe['Dietary Tags'])}")
+            print(f"Instructions: {' '.join(recipe['Instructions'])}")
+            
 
 def searchByMeal():
-    pass
+    recipeBook = createRecipeBook()
+    meal = input("Enter the meal type: ")
+    for recipe in recipeBook.values():
+        if recipe["Meal"].lower() == meal.lower():
+            print(f"Recipe found: {recipe['Title']}")
+            print(f"Ingredients: {', '.join(recipe['Ingredients'])}")
+            print(f"Servings: {recipe['Servings']}")
+            print(f"Meal: {recipe['Meal']}")
+            print(f"Dietary Tags: {', '.join(recipe['Dietary Tags'])}")
+            print(f"Instructions: {' '.join(recipe['Instructions'])}")
 
 def searchByDiet():
-    pass
+    recipeBook = createRecipeBook()
+    diet = input("Enter the dietary tag: ")
+    for recipe in recipeBook.values():
+        if diet.lower() in [tag.lower() for tag in recipe["Dietary Tags"]]:
+            print(f"Recipe found: {recipe['Title']}")
+            print(f"Ingredients: {', '.join(recipe['Ingredients'])}")
+            print(f"Servings: {recipe['Servings']}")
+            print(f"Meal: {recipe['Meal']}")
+            print(f"Dietary Tags: {', '.join(recipe['Dietary Tags'])}")
+            print(f"Instructions: {' '.join(recipe['Instructions'])}")
 
 def randomRecipe():
     import random
@@ -145,4 +171,4 @@ def randomRecipe():
         print(file.read())
 
 #! main running code here
-createRecipeBook() 
+main()
